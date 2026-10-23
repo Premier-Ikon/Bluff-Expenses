@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { useAuth } from "../lib/AuthProvider";
 
@@ -63,6 +64,9 @@ export function LoginScreen() {
         <button className="primary" type="submit" disabled={busy || !ready}>
           {busy ? "Signing in…" : "Sign in"}
         </button>
+        <Link className="ghost forgot-button" href="/forgot">
+          Forgot password?
+        </Link>
       </form>
     </main>
   );

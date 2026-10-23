@@ -19,6 +19,7 @@ export function ReceiptSheet({
   warning,
   busy,
   error,
+  mode = "create",
   onClose,
   onConfirm,
 }: {
@@ -27,6 +28,7 @@ export function ReceiptSheet({
   warning: string;
   busy: boolean;
   error: string;
+  mode?: "create" | "edit";
   onClose: () => void;
   onConfirm: (payload: {
     merchant: string;
@@ -46,10 +48,19 @@ export function ReceiptSheet({
   const [total, setTotal] = useState(initial.total ? String(initial.total) : "");
   const [notes, setNotes] = useState(initial.notes || "");
   const [mounted, setMounted] = useState(false);
+  const isEdit = mode === "edit";
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    setMerchant(initial.merchant || "");
+    setPurchasedAt(initial.purchasedAt || new Date().toISOString().slice(0, 10));
+    setCategory(initial.category || "other");
+    setTotal(initial.total ? String(initial.total) : "");
+    setNotes(initial.notes || "");
+  }, [initial]);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -101,9 +112,9 @@ export function ReceiptSheet({
 
         <header className="sheet-head">
           <div>
-            <p className="eyebrow">Check the receipt</p>
+            <p className="eyebrow">{isEdit ? "Edit receipt" : "Check the receipt"}</p>
             <h1 id="receipt-title" className="sheet-title">
-              Confirm total
+              {isEdit ? "Update total" : "Confirm total"}
             </h1>
           </div>
           <button className="icon-box sheet-close" type="button" onClick={onClose} disabled={busy} aria-label="Close">
@@ -150,7 +161,11 @@ export function ReceiptSheet({
               required
             />
           </label>
-          <p className="muted sheet-hint">We pull the receipt total from the photo. Edit it if anything looks off — the image is saved with the expense.</p>
+          <p className="muted sheet-hint">
+            {isEdit
+              ? "Adjust anything that looks off, then save. Premier Ikon gets an updated confirmation email."
+              : "We pull the receipt total from the photo. Edit it if anything looks off — the image is saved with the expense."}
+          </p>
 
           <label>
             Notes
@@ -162,7 +177,7 @@ export function ReceiptSheet({
 
         <footer className="sheet-foot">
           <button className="primary" type="submit" disabled={busy}>
-            {busy ? "Saving…" : "Confirm and send"}
+            {busy ? "Saving…" : isEdit ? "Save changes" : "Confirm and send"}
           </button>
         </footer>
       </form>

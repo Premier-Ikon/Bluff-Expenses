@@ -375,6 +375,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .detail-actions {
+  display: grid;
+  gap: 10px;
   margin-top: 8px;
   padding-top: 8px;
 }
@@ -1044,6 +1046,56 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   letter-spacing: 0;
   text-transform: none;
   text-align: left;
+}
+
+.auth-foot {
+  margin: 4px 0 0;
+  text-align: center;
+  font-size: 13px;
+}
+
+.auth-foot a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-foot a:hover {
+  color: var(--yellow);
+}
+
+.label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.forgot-link {
+  color: var(--yellow);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+a.forgot-button,
+.forgot-button {
+  width: 100%;
+  text-decoration: none;
+  color: var(--muted);
+}
+
+a.forgot-button:hover,
+.forgot-button:hover {
+  color: var(--yellow);
+  border-color: rgba(255, 225, 74, 0.35);
 }
 
 .reading {
