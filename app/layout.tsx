@@ -7,10 +7,6 @@ export const metadata: Metadata = {
   description: "Photograph receipts and track Bluff 2026 US Tour expenses.",
   applicationName: "Bluff US Tour Expenses",
   robots: { index: false, follow: false },
-  icons: {
-    icon: [{ url: "/favicon.ico" }, { url: "/icon.png", type: "image/png" }],
-    apple: [{ url: "/apple-icon.png" }],
-  },
   appleWebApp: { capable: true, title: "Tour Expenses", statusBarStyle: "black-translucent" },
 };
 
