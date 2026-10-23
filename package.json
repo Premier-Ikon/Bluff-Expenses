@@ -1,0 +1,22 @@
+{
+  "name": "pi-bluff-tour-expenses-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0 -p 3010",
+    "build": "next build",
+    "start": "next start -H 0.0.0.0 -p 3010"
+  },
+  "dependencies": {
+    "firebase": "^11.0.2",
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "typescript": "^5.5.0"
+  }
+}
