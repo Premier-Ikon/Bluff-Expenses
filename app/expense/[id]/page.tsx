@@ -83,23 +83,29 @@ export default function ExpensePage() {
               <img className="detail-photo" src={expense.imageDataUrl} alt="Receipt" />
             </div>
           ) : null}
-          {expense.items.map((item, index) => (
-            <div className="line" key={item.id || index}>
-              <span>
-                {item.name}
-                {item.qty && item.qty !== 1 ? ` × ${item.qty}` : ""}
-              </span>
-              <strong>{formatMoney(item.amount, expense.currency)}</strong>
+          {expense.items.length > 1 || (expense.items[0] && expense.items[0].name !== "Receipt total")
+            ? expense.items.map((item, index) => (
+                <div className="line" key={item.id || index}>
+                  <span>
+                    {item.name}
+                    {item.qty && item.qty !== 1 ? ` × ${item.qty}` : ""}
+                  </span>
+                  <strong>{formatMoney(item.amount, expense.currency)}</strong>
+                </div>
+              ))
+            : null}
+          {expense.tax > 0 ? (
+            <div className="line">
+              <span>Tax</span>
+              <span>{formatMoney(expense.tax, expense.currency)}</span>
             </div>
-          ))}
-          <div className="line">
-            <span>Tax</span>
-            <span>{formatMoney(expense.tax, expense.currency)}</span>
-          </div>
-          <div className="line">
-            <span>Tip</span>
-            <span>{formatMoney(expense.tip, expense.currency)}</span>
-          </div>
+          ) : null}
+          {expense.tip > 0 ? (
+            <div className="line">
+              <span>Tip</span>
+              <span>{formatMoney(expense.tip, expense.currency)}</span>
+            </div>
+          ) : null}
           <div className="line total-line">
             <strong>Total</strong>
             <strong>{formatMoney(expense.total, expense.currency)}</strong>
